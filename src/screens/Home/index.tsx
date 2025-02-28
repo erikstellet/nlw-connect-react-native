@@ -1,53 +1,58 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Icon from '@react-native-vector-icons/lucide'
+import { Image, ScrollView, Text, View } from 'react-native'
+import { createStyleSheet, useStyles } from 'react-native-unistyles'
 
-import { SubscriptionForm } from './SubscriptionForm'
+import { SubscriptionForm } from './components/SubscriptionForm'
 
 export default function Home() {
+  const {
+    styles,
+    theme: { colors },
+  } = useStyles(stylesheet)
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <Image resizeMode="cover" source={require('@assets/logo.png')} />
+
         <Text style={styles.title}>
-          <Text style={{ color: '#6F9DE2' }}>CodeCraft{'\n'}</Text>
+          <Text style={{ color: colors.blue }}>CodeCraft{'\n'}</Text>
           Summit 2025
         </Text>
       </View>
 
-      <View style={styles.main}>
-        <View style={styles.card}>
+      <View style={styles.card}>
+        <View style={styles.wrapper}>
+          <Text style={styles.subTitle}>Sobre o evento</Text>
+
           <View style={styles.wrapper}>
-            <Text style={styles.text}>Sobre o evento</Text>
-
-            <View style={styles.wrapperText}>
-              <Icon name="radio" style={styles.icon} />
-              <Text style={styles.textTag}>AO VIVO</Text>
-            </View>
+            <Icon name="radio" style={styles.icon} />
+            <Text style={styles.text}>AO VIVO</Text>
           </View>
-
-          <Text style={styles.description}>
-            Um evento feito por e para pessoas desenvolvedoras apaixonadas por
-            criar soluções inovadoras e compartilhar conhecimento. Vamos
-            mergulhar nas tendências mais recentes em desenvolvimento de
-            software, arquitetura de sistemas e tecnologias emergentes, com
-            palestras, workshops e hackathons.
-            {'\n'}
-            {'\n'}
-            Dias 15 a 17 de março | Das 18h às 21h
-          </Text>
         </View>
 
-        <SubscriptionForm />
+        <Text style={styles.description}>
+          Um evento feito por e para pessoas desenvolvedoras apaixonadas por
+          criar soluções inovadoras e compartilhar conhecimento. Vamos mergulhar
+          nas tendências mais recentes em desenvolvimento de software,
+          arquitetura de sistemas e tecnologias emergentes, com palestras,
+          workshops e hackathons.
+          {'\n'}
+          {'\n'}
+          Dias 15 a 17 de março | Das 18h às 21h
+        </Text>
       </View>
+
+      <SubscriptionForm />
     </ScrollView>
   )
 }
 
-export const styles = StyleSheet.create({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   card: {
     alignItems: 'flex-start',
-    backgroundColor: '#191D24',
-    borderColor: '#21252C',
+    backgroundColor: colors.gray700,
+    borderColor: colors.gray600,
     borderRadius: 16,
 
     borderWidth: 1,
@@ -56,72 +61,52 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   container: {
+    flexGrow: 1,
     paddingHorizontal: 16,
-    paddingVertical: '8%',
-    flex: 1,
+    paddingVertical: '10%',
+    gap: 16,
+
     width: '100%',
   },
   description: {
-    color: '#95A1B1',
+    color: colors.gray300,
+    fontFamily: fonts.montserratRegular,
     fontSize: 14,
-    fontWeight: 400,
     lineHeight: 22.4,
   },
   header: {
     alignItems: 'center',
     gap: 24,
-    marginBottom: 40,
+    marginBottom: 24,
     width: '100%',
   },
-  iconButton: {
-    color: '#6F9DE2',
-    fontSize: 24,
-  },
   icon: {
-    color: '#9871F3',
+    color: colors.purple,
     fontSize: 20,
+  },
+  subTitle: {
+    color: colors.gray200,
+    fontSize: 20,
+    fontFamily: fonts.oxaniumSemiBold,
+    lineHeight: 20,
   },
   text: {
-    color: '#C8D0DA',
-    fontSize: 20,
-    fontWeight: 500,
-    textAlign: 'center',
-  },
-  textTag: {
-    color: '#9871F3',
+    color: colors.purple,
     fontSize: 12,
-    fontWeight: 700,
+    fontFamily: fonts.montserratSemiBold
   },
   title: {
-    color: '#DAE4F2',
+    color: colors.gray100,
+    fontFamily: fonts.oxaniumSemiBold,
     fontSize: 36,
-    fontWeight: 500,
     textAlign: 'center',
-  },
-  main: {
-    alignItems: 'center',
-    flex: 1,
-    gap: 16,
-    justifyContent: 'space-between',
   },
   wrapper: {
     alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-    width: '100%',
-  },
-  wrapperInputs: {
-    alignItems: 'flex-start',
     flex: 1,
-    gap: 8,
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  wrapperText: {
-    alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
-    justifyContent: 'space-between',
+
+    justifyContent: 'flex-end',
   },
-})
+}))

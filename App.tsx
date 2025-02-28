@@ -1,15 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import type React from 'react'
 
 import { ImageBackground, StatusBar, useColorScheme } from 'react-native'
 
 import Home from './src/screens/Home'
+
+import './src/typings/unistyles'
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'light'

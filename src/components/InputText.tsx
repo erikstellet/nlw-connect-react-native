@@ -1,5 +1,5 @@
 import Icon from '@react-native-vector-icons/lucide'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { type Control, Controller, type FieldValues } from 'react-hook-form'
 import {
   StyleSheet,
@@ -24,7 +24,7 @@ export function InputText({ control, error, icon, name, ...props }: Props) {
       control={control}
       name={name}
       render={({ field: { onChange, value } }) => (
-        <View style={styles.container}>
+        <Fragment>
           <View
             style={[
               styles.wrapper,
@@ -34,11 +34,13 @@ export function InputText({ control, error, icon, name, ...props }: Props) {
             <Icon
               name={icon}
               style={[
-                styles.icon, { color: isFocused ? '#DAE4F2' : '#6F7D90' },
+                styles.icon,
+                { color: isFocused ? '#DAE4F2' : '#6F7D90' },
               ]}
             />
 
             <TextInput
+              cursorColor={'#DAE4F2'}
               onChangeText={onChange}
               onBlur={() => setIsFocused(value !== undefined && value !== '')}
               onFocus={() => setIsFocused(true)}
@@ -49,18 +51,14 @@ export function InputText({ control, error, icon, name, ...props }: Props) {
             />
           </View>
 
-          {error && <Text>{error}</Text>}
-        </View>
+          {error && <Text style={styles.text}>{error}</Text>}
+        </Fragment>
       )}
     />
   )
 }
 
 export const styles = StyleSheet.create({
-  container: {
-    gap: 4,
-    width: '100%',
-  },
   input: {
     flex: 1,
     color: '#DAE4F2',
@@ -82,10 +80,10 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   text: {
-    color: '#C8D0DA',
-    fontSize: 20,
-    fontWeight: 500,
-    textAlign: 'center',
+    color: '#F05D6C',
+    fontSize: 12,
+    fontWeight: 600,
+    lineHeight: 19.2,
   },
   icon: {
     color: '#6F7D90',

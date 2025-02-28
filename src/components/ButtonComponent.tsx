@@ -1,16 +1,35 @@
-import { Pressable, type PressableProps, StyleSheet, Text } from 'react-native'
+import {
+  ActivityIndicator,
+  Pressable,
+  type PressableProps,
+  StyleSheet,
+  Text,
+} from 'react-native'
 
 import Icon from '@react-native-vector-icons/lucide'
 
 interface Props extends PressableProps {
+  loading: boolean
   title: string
 }
 
-export function ButtonComponent({ title, ...props }: Props) {
+export function ButtonComponent({ loading, title, ...props }: Props) {
   return (
-    <Pressable style={styles.container} {...props}>
+    <Pressable
+      disabled={props.disabled || loading}
+      style={[
+        styles.container,
+        (props.disabled || loading) && { opacity: 0.75 },
+      ]}
+      {...props}
+    >
       <Text style={styles.title}>{title}</Text>
-      <Icon name="arrow-right" style={styles.icon} />
+
+      {loading ? (
+        <ActivityIndicator color={'#FFF'} size="small" />
+      ) : (
+        <Icon name="arrow-right" style={styles.icon} />
+      )}
     </Pressable>
   )
 }

@@ -6,6 +6,7 @@ import z from 'zod'
 
 import { ButtonComponent } from '@components/ButtonComponent'
 import { InputText } from '@components/InputText'
+import { useState } from 'react'
 
 const subscriptionSchema = z.object({
   name: z.string().min(2, 'Digite seu nome completo'),
@@ -23,8 +24,15 @@ export function SubscriptionForm() {
     resolver: zodResolver<SubscriptionSchema>(subscriptionSchema),
   })
 
+  const [loading, setLoading] = useState(false)
+
   async function onSubscribe(data: SubscriptionSchema) {
-    console.log(data)
+    setLoading(true)
+
+    setTimeout(() => {
+      console.log(data)
+      setLoading(false)
+    }, 2000)
   }
 
   return (
@@ -48,7 +56,11 @@ export function SubscriptionForm() {
         />
       </View>
 
-      <ButtonComponent title="Confirmar" onPress={handleSubmit(onSubscribe)} />
+      <ButtonComponent
+        onPress={handleSubmit(onSubscribe)}
+        title="Confirmar"
+        loading={loading}
+      />
     </View>
   )
 }
@@ -61,7 +73,7 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
 
     borderWidth: 1,
-    gap: 20,
+    gap: 24,
     padding: 24,
     width: '100%',
   },
@@ -74,7 +86,7 @@ export const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'flex-start',
     flex: 1,
-    gap: 8,
+    gap: 12,
     justifyContent: 'space-between',
 
     width: '100%',
