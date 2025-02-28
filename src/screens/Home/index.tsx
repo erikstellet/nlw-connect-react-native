@@ -11,7 +11,10 @@ export default function Home() {
   } = useStyles(stylesheet)
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={styles.header}>
         <Image resizeMode="cover" source={require('@assets/logo.png')} />
 

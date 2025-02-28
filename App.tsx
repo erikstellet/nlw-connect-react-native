@@ -5,6 +5,7 @@ import { ImageBackground, StatusBar, useColorScheme } from 'react-native'
 import Home from './src/screens/Home'
 
 import './src/typings/unistyles'
+import Invite from '@screens/Invite'
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'light'
@@ -20,7 +21,7 @@ function App(): React.JSX.Element {
         translucent
       />
 
-      <Home />
+      <Invite />
     </ImageBackground>
   )
 }
