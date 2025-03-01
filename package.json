@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-clipboard/clipboard": "^1.16.1",
     "@react-native-vector-icons/common": "^11.0.0",
     "@react-native-vector-icons/lucide": "^0.474.0-alpha.0",
     "react": "19.0.0",

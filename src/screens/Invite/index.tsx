@@ -1,12 +1,26 @@
 import { Text } from "react-native";
 import { Image, ScrollView, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Stats } from "./components/Stats";
 import { Ranking } from "./components/Ranking";
+import { InputText } from "@components/InputText";
+
+const subscriptionSchema = z.object({
+  link: z.string(),
+})
+
+type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 
 export default function Invite() {
   const { styles } = useStyles(stylesheet)
+  
+  const { control } = useForm({
+    resolver: zodResolver<SubscriptionSchema>(subscriptionSchema),
+  })
 
   return (
     <ScrollView
@@ -32,7 +46,14 @@ export default function Invite() {
             </Text>
           </View>
 
-          <View style={{ backgroundColor: 'red', height: 40, width: '100%'}} />
+          <InputText
+            control={control}
+            defaultValue="devstage.com/codecraft-summit-2025/1289"
+            icon="link"
+            isCopy
+            name="name"
+            placeholder="Nome completo"
+          />
         </View>
 
         <Stats />

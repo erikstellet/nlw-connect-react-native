@@ -27,16 +27,18 @@ export function Ranking() {
       <Text style={styles.title}>Ranking de indicações</Text>
 
       <View style={styles.wrapper}>
-        {items.map(({ points, medal, name }, index) => (
+        {items.map(({ points, medal, name }, i) => (
           <View key={name} style={styles.card}>
             <View style={styles.wrapper}>
               <Text style={styles.information}>
-                <Text style={{ fontFamily: fonts.montserratSemiBold }}>
-                  {index + 1}°
-                </Text>
+                <Text style={{ fontFamily: fonts.montserratSemiBold }}>{i + 1}°</Text>
                 {' '}| {name}
-                </Text>
-              <Text style={styles.points}>{points}</Text>
+              </Text>
+
+              <View style={styles.wrapperPoints}>
+                <Text style={styles.points}>{points}</Text>
+                {i === 0 && <Text style={styles.tag}>Você</Text>}
+              </View>
             </View>
 
             <Image resizeMode="cover" source={medal} style={styles.medal}/>
@@ -83,6 +85,21 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     fontSize: 24,
     lineHeight: 24,
   },
+  tag: {
+    alignItems: 'center',
+    borderRadius: 6,
+    backgroundColor: colors.gray500,
+    color: colors.gray300,
+
+    fontFamily: fonts.montserratRegular,
+    fontSize: 12,
+    gap: 8,
+    justifyContent: 'center',
+
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    lineHeight: 19.2,
+  },
   title: {
     color: colors.gray200,
     fontFamily: fonts.oxaniumSemiBold,
@@ -94,4 +111,9 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
     gap: 8,
     width: '100%'
   },
+  wrapperPoints: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 12
+  }
 }))
