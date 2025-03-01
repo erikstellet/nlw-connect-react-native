@@ -1,6 +1,6 @@
-import Icon from "@react-native-vector-icons/lucide";
-import { Text, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import Icon from '@react-native-vector-icons/lucide'
+import { Text, View } from 'react-native'
+import { createStyleSheet, useStyles } from 'react-native-unistyles'
 
 export function Stats() {
   const { styles } = useStyles(stylesheet)
@@ -20,7 +20,7 @@ export function Stats() {
       icon: 'medal',
       label: 'Posição no ranking',
       value: '3°',
-    }
+    },
   ]
 
   return (
@@ -48,7 +48,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
 
     borderWidth: 1,
     padding: 24,
-    width: '100%'
+    width: '100%',
   },
   container: {
     alignItems: 'center',

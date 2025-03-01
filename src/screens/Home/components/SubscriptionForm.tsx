@@ -1,21 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
-
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Text, View } from 'react-native'
+import { createStyleSheet, useStyles } from 'react-native-unistyles'
 import z from 'zod'
 
 import { ButtonComponent } from '@components/ButtonComponent'
 import { InputText } from '@components/InputText'
-import { useState } from 'react'
 
 const subscriptionSchema = z.object({
-  name: z.string().min(2, 'Digite seu nome completo'),
-  email: z.string().email('Digite uma e-mail válido'),
+  name: z
+    .string({ message: 'Preencha o campo' })
+    .min(2, 'Digite seu nome completo'),
+  email: z
+    .string({ message: 'Preencha o campo' })
+    .email('Digite uma e-mail válido'),
 })
 
 type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 
 export function SubscriptionForm() {
+  const { styles } = useStyles(stylesheet)
+
   const {
     control,
     handleSubmit,
@@ -65,11 +71,11 @@ export function SubscriptionForm() {
   )
 }
 
-export const styles = StyleSheet.create({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   container: {
     alignItems: 'flex-start',
-    backgroundColor: '#191D24',
-    borderColor: '#21252C',
+    backgroundColor: colors.gray700,
+    borderColor: colors.gray600,
     borderRadius: 16,
 
     borderWidth: 1,
@@ -78,9 +84,9 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    color: '#C8D0DA',
+    color: colors.gray200,
+    fontFamily: fonts.oxaniumSemiBold,
     fontSize: 20,
-    fontWeight: 500,
     textAlign: 'center',
   },
   wrapper: {
@@ -91,4 +97,4 @@ export const styles = StyleSheet.create({
 
     width: '100%',
   },
-})
+}))

@@ -2,11 +2,11 @@ import {
   ActivityIndicator,
   Pressable,
   type PressableProps,
-  StyleSheet,
   Text,
 } from 'react-native'
 
 import Icon from '@react-native-vector-icons/lucide'
+import { createStyleSheet, useStyles } from 'react-native-unistyles'
 
 interface Props extends PressableProps {
   loading: boolean
@@ -14,8 +14,14 @@ interface Props extends PressableProps {
 }
 
 export function ButtonComponent({ loading, title, ...props }: Props) {
+  const {
+    styles,
+    theme: { colors },
+  } = useStyles(stylesheet)
+
   return (
     <Pressable
+      android_ripple={{ color: colors.ripple, foreground: true }}
       disabled={props.disabled || loading}
       style={[
         styles.container,
@@ -26,7 +32,7 @@ export function ButtonComponent({ loading, title, ...props }: Props) {
       <Text style={styles.title}>{title}</Text>
 
       {loading ? (
-        <ActivityIndicator color={'#FFF'} size="small" />
+        <ActivityIndicator color={colors.white} size="small" />
       ) : (
         <Icon name="arrow-right" style={styles.icon} />
       )}
@@ -34,26 +40,28 @@ export function ButtonComponent({ loading, title, ...props }: Props) {
   )
 }
 
-export const styles = StyleSheet.create({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   container: {
     alignItems: 'center',
-    backgroundColor: '#2A313C',
+    backgroundColor: colors.gray500,
     borderRadius: 10,
     flexDirection: 'row',
 
     height: 48,
     justifyContent: 'space-between',
     paddingHorizontal: 20,
+    overflow: 'hidden',
+
     width: '100%',
   },
   title: {
-    color: '#6F9DE2',
+    color: colors.blue,
+    fontFamily: fonts.montserratSemiBold,
     fontSize: 16,
-    fontWeight: 600,
     lineHeight: 25.6,
   },
   icon: {
-    color: '#6F9DE2',
+    color: colors.blue,
     fontSize: 24,
   },
-})
+}))

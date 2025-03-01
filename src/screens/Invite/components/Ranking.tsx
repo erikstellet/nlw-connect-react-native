@@ -1,8 +1,11 @@
-import { Image, Text, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { Image, Text, View } from 'react-native'
+import { createStyleSheet, useStyles } from 'react-native-unistyles'
 
 export function Ranking() {
-  const { styles, theme: { fonts } } = useStyles(stylesheet)
+  const {
+    styles,
+    theme: { fonts },
+  } = useStyles(stylesheet)
 
   const items = [
     {
@@ -16,10 +19,10 @@ export function Ranking() {
       points: String(928),
     },
     {
-     medal: require('@assets/medal-cooper.png'),
-     name: 'Rodrigo Gonçalves',
+      medal: require('@assets/medal-cooper.png'),
+      name: 'Rodrigo Gonçalves',
       points: String(875),
-    }
+    },
   ]
 
   return (
@@ -31,8 +34,10 @@ export function Ranking() {
           <View key={name} style={styles.card}>
             <View style={styles.wrapper}>
               <Text style={styles.information}>
-                <Text style={{ fontFamily: fonts.montserratSemiBold }}>{i + 1}°</Text>
-                {' '}| {name}
+                <Text style={{ fontFamily: fonts.montserratSemiBold }}>
+                  {i + 1}°
+                </Text>{' '}
+                | {name}
               </Text>
 
               <View style={styles.wrapperPoints}>
@@ -41,7 +46,7 @@ export function Ranking() {
               </View>
             </View>
 
-            <Image resizeMode="cover" source={medal} style={styles.medal}/>
+            <Image resizeMode="cover" source={medal} style={styles.medal} />
           </View>
         ))}
       </View>
@@ -58,7 +63,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
 
     borderWidth: 1,
     padding: 24,
-    width: '100%'
+    width: '100%',
   },
   container: {
     alignItems: 'flex-start',
@@ -74,7 +79,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   },
   medal: {
     position: 'absolute',
-    right: 8,
+    right: 24,
     top: 0,
 
     width: 56,
@@ -109,11 +114,11 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   wrapper: {
     alignItems: 'flex-start',
     gap: 8,
-    width: '100%'
+    width: '100%',
   },
   wrapperPoints: {
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 12
-  }
+    gap: 12,
+  },
 }))

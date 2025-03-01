@@ -1,13 +1,13 @@
-import { Text } from "react-native";
-import { Image, ScrollView, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { Text } from 'react-native'
+import { Image, ScrollView, View } from 'react-native'
+import { createStyleSheet, useStyles } from 'react-native-unistyles'
+import { z } from 'zod'
 
-import { Stats } from "./components/Stats";
-import { Ranking } from "./components/Ranking";
-import { InputText } from "@components/InputText";
+import { InputText } from '@components/InputText'
+import { Ranking } from './components/Ranking'
+import { Stats } from './components/Stats'
 
 const subscriptionSchema = z.object({
   link: z.string(),
@@ -17,7 +17,7 @@ type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 
 export default function Invite() {
   const { styles } = useStyles(stylesheet)
-  
+
   const { control } = useForm({
     resolver: zodResolver<SubscriptionSchema>(subscriptionSchema),
   })
@@ -27,7 +27,7 @@ export default function Invite() {
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      <Image resizeMode="cover" source={require('@assets/logo.png')} />  
+      <Image resizeMode="cover" source={require('@assets/logo.png')} />
 
       <View style={styles.wrapper(28)}>
         <View style={styles.wrapper(8)}>
@@ -42,7 +42,8 @@ export default function Invite() {
             <Text style={styles.subTitle}>Indique e Ganhe</Text>
             <Text style={styles.description}>
               Convide mais pessoas para o evento e concorra a prêmios{' '}
-              exclusivos! É só compartilhar o link abaixo e acompanhar as inscrições:
+              exclusivos! É só compartilhar o link abaixo e acompanhar as
+              inscrições:
             </Text>
           </View>
 
@@ -95,6 +96,6 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   wrapper: (gap: number) => ({
     alignItems: 'flex-start',
     gap: gap,
-    width: '100%'
+    width: '100%',
   }),
 }))

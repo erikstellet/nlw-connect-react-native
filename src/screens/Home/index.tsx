@@ -96,7 +96,7 @@ const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   text: {
     color: colors.purple,
     fontSize: 12,
-    fontFamily: fonts.montserratSemiBold
+    fontFamily: fonts.montserratSemiBold,
   },
   title: {
     color: colors.gray100,

@@ -21,7 +21,7 @@ function App(): React.JSX.Element {
         translucent
       />
 
-      <Invite />
+      <Home />
     </ImageBackground>
   )
 }

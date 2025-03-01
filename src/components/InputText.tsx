@@ -1,3 +1,4 @@
+import Clipboard from '@react-native-clipboard/clipboard'
 import Icon from '@react-native-vector-icons/lucide'
 import { Fragment, useState } from 'react'
 import { type Control, Controller, type FieldValues } from 'react-hook-form'
@@ -9,22 +10,32 @@ import {
   View,
 } from 'react-native'
 import { createStyleSheet, useStyles } from 'react-native-unistyles'
-import Clipboard from '@react-native-clipboard/clipboard';
 
 interface Props extends TextInputProps {
   control: Control<FieldValues>
   error?: string | undefined
   icon: string
-  isCopy?: boolean;
+  isCopy?: boolean
   name: string
 }
 
-export function InputText({ control, error, icon, isCopy, name, ...props }: Props) {
-  const { styles, theme: { colors } } = useStyles(stylesheet)
-  
+export function InputText({
+  control,
+  error,
+  icon,
+  isCopy,
+  name,
+  ...props
+}: Props) {
+  const {
+    styles,
+    theme: { colors },
+  } = useStyles(stylesheet)
+
   const [isFocused, setIsFocused] = useState(false)
-  
-  const handleCopy = () => Clipboard.setString(props.defaultValue)
+
+  const handleCopy = () =>
+    props.defaultValue && Clipboard.setString(props.defaultValue)
 
   return (
     <Controller
@@ -35,12 +46,26 @@ export function InputText({ control, error, icon, isCopy, name, ...props }: Prop
           <View
             style={[
               styles.container,
-              { borderColor: colors[isFocused || value ? 'gray100' : 'gray600'] },
+              {
+                borderColor: colors[isFocused || value ? 'gray100' : 'gray600'],
+              },
             ]}
           >
             <Icon
               name={icon}
-              style={[styles.icon, { color: colors[isFocused ? 'gray100' : 'gray400']}]}
+              style={[
+                styles.icon,
+                {
+                  color:
+                    colors[
+                      isFocused || props.defaultValue
+                        ? 'gray100'
+                        : error
+                          ? 'danger'
+                          : 'gray400'
+                    ],
+                },
+              ]}
             />
 
             <TextInput
@@ -60,7 +85,7 @@ export function InputText({ control, error, icon, isCopy, name, ...props }: Prop
                 onPress={handleCopy}
                 style={styles.button}
               >
-                <Icon name='copy' style={styles.iconButton} />
+                <Icon name="copy" style={styles.iconButton} />
               </Pressable>
             )}
           </View>
@@ -72,13 +97,14 @@ export function InputText({ control, error, icon, isCopy, name, ...props }: Prop
   )
 }
 
-const stylesheet = createStyleSheet(({ colors }) => ({
+const stylesheet = createStyleSheet(({ colors, fonts }) => ({
   button: {
     alignItems: 'center',
     borderRadius: 6,
     backgroundColor: colors.gray500,
     display: 'flex',
 
+    marginRight: -8,
     overflow: 'hidden',
     padding: 6,
   },
@@ -107,13 +133,13 @@ const stylesheet = createStyleSheet(({ colors }) => ({
   input: {
     flex: 1,
     color: colors.gray100,
+    fontFamily: fonts.montserratRegular,
     fontSize: 16,
-    fontWeight: 400,
   },
   text: {
     color: colors.danger,
+    fontFamily: fonts.montserratSemiBold,
     fontSize: 12,
-    fontWeight: 600,
     lineHeight: 19.2,
-  }
+  },
 }))
